@@ -20,8 +20,8 @@ int main() {
         char command[1024];
         fgets(command,1024,stdin);
         sock.write_some(boost::asio::buffer(command));
+        command[0] = 0;
         size_t bytes = read(sock, boost::asio::buffer(command), boost::bind(read_complete,command,_1,_2));
-
         std::cout << command;
     }
 }
