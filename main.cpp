@@ -6,7 +6,7 @@ size_t read_complete(char * buf, const boost::system::error_code & err, size_t b
 {
     if ( err)
         return 0;
-    bool found = std::find(buf, buf + bytes, -1) < buf + bytes;
+    bool found = std::find(buf, buf + bytes, '\n') < buf + bytes;
     return not found;
 }
 
