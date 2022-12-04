@@ -17,7 +17,7 @@ int main() {
     acceptor.accept(sock);
     std::cout << "новое подключение\n";
     while (true) {
-        char command[1024];
+        char command[1024]= {};
         fgets(command,1024,stdin);
         sock.write_some(boost::asio::buffer(command));
         command[0] = 0;
