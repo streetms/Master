@@ -6,7 +6,7 @@ size_t read_complete(char * buf, const boost::system::error_code & err, size_t b
 {
     if ( err)
         return 0;
-    bool found = std::find(buf, buf + bytes, '\n') < buf + bytes;
+    bool found = std::find(buf, buf + bytes, -1) < buf + bytes;
     return not found;
 }
 
@@ -21,6 +21,7 @@ int main() {
         fgets(command,1024,stdin);
         sock.write_some(boost::asio::buffer(command));
         size_t bytes = read(sock, boost::asio::buffer(command), boost::bind(read_complete,command,_1,_2));
+
         std::cout << command;
     }
 }
