@@ -23,5 +23,6 @@ int main() {
         command[0] = 0;
         size_t bytes = read(sock, boost::asio::buffer(command), boost::bind(read_complete,command,_1,_2));
         std::cout << command;
+        command[0] = 0;
     }
 }
