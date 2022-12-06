@@ -22,9 +22,9 @@ int main() {
         std::getline(std::cin,command);
         command+="\n";
         sock.write_some(boost::asio::buffer(command));
-        //read(sock, boost::asio::buffer(command), boost::bind(read_complete,command,_1,_2));
-        boost::asio::read_until(sock,buff,-1);
-        std::getline(std::istream(&buff),command);
-        std::cout << command;
+        char result[1024*1024];
+        size_t bytes = read(sock, boost::asio::buffer(result), boost::bind(read_complete,result,_1,_2));
+        result[strchr(result,-1)-result] =0;
+        std::cout << result;
     }
 }
