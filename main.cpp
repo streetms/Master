@@ -17,13 +17,13 @@ int main() {
     acceptor.accept(sock);
     std::cout << "новое подключение\n";
     while (true) {
-        char command[1024]= {};
-        fgets(command,1024,stdin);
+        boost::asio::streambuf buff;
+        std::string command;
+        std::getline(std::cin,command);
+        command+="\n";
         sock.write_some(boost::asio::buffer(command));
-        command[0] = 0;
-        size_t bytes = read(sock, boost::asio::buffer(command), boost::bind(read_complete,command,_1,_2));
-        command[strchr(command,-1)-command] =0;
+        //read(sock, boost::asio::buffer(command), boost::bind(read_complete,command,_1,_2));
+        boost::asio::read_until(sock,buff,-1);
         std::cout << command;
-        command[0] = 0;
     }
 }
