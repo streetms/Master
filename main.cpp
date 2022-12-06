@@ -24,6 +24,7 @@ int main() {
         sock.write_some(boost::asio::buffer(command));
         //read(sock, boost::asio::buffer(command), boost::bind(read_complete,command,_1,_2));
         boost::asio::read_until(sock,buff,-1);
+        std::getline(std::istream(&buff),command);
         std::cout << command;
     }
 }
