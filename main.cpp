@@ -25,6 +25,10 @@ int main() {
         char result[1024*1024];
         size_t bytes = read(sock, boost::asio::buffer(result), boost::bind(read_complete,result,_1,_2));
         result[strchr(result,-1)-result] =0;
+//        std::cout << command;
+//        size_t bytes = read(sock, boost::asio::buffer(result), boost::bind(read_complete,result,_1,_2));
+//        result[strchr(result,-1)-result] =0;
         std::cout << result;
+
     }
 }
